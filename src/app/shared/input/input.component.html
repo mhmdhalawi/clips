@@ -1,14 +1,26 @@
 <input
   [formControl]="control"
-  type="text"
+  [mask]="format"
+  [type]="type"
   class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
-  placeholder="Enter Name"
+  [placeholder]="placeholder"
 />
 <ng-container *ngIf="control?.touched && control?.dirty">
   <p class="text-red-400" *ngIf="control?.errors?.required">
     Field cannot be empty
   </p>
   <p class="text-red-400" *ngIf="control?.errors?.minlength">
-    Field must contain more than 3 letters
+    Field must contain more than 3 characters
+  </p>
+  <p class="text-red-400" *ngIf="control?.errors?.email">
+    You must provide a valid email
+  </p>
+  <p class="text-red-400" *ngIf="control?.errors?.min || control?.errors?.max">
+    You must between 18 and 100
+  </p>
+
+  <p class="text-red-400" *ngIf="control?.errors?.pattern">
+    Passwords must be at least 8 characters long, have at least one number, one
+    uppercase letter , one lowercase letter.
   </p>
 </ng-container>
