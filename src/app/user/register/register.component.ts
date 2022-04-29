@@ -12,7 +12,7 @@ export class RegisterComponent {
 
   password = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm),
+    Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/),
   ]);
   confirmPassword = new FormControl('', [Validators.required]);
 
@@ -32,5 +32,15 @@ export class RegisterComponent {
     phoneNumber: this.phoneNumber,
   });
 
+  showAlert = false;
+  alertMessage = 'Your account is being created. Please wait...';
+  alertColor = 'blue';
+
   constructor() {}
+
+  register() {
+    this.showAlert = true;
+    this.alertMessage = 'Your account is being created. Please wait...';
+    this.alertColor = 'blue';
+  }
 }
