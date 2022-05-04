@@ -38,14 +38,14 @@ export class RegisterComponent {
 
   showAlert = false;
   alertMessage = 'Your account is being created. Please wait...';
-  alertColor = 'blue';
+  alertColor = 'bg-blue-400';
 
   constructor(private authService: AuthService) {}
 
   async register() {
     this.showAlert = true;
     this.alertMessage = 'Your account is being created. Please wait...';
-    this.alertColor = 'blue';
+    this.alertColor = 'bg-blue-400';
 
     this.inSubmission = true;
 
@@ -62,13 +62,13 @@ export class RegisterComponent {
     } catch (error) {
       console.log(error);
       this.alertMessage = "Sorry, we couldn't create your account.";
-      this.alertColor = 'red';
+      this.alertColor = 'bg-red-400';
 
       this.inSubmission = false;
       return;
     }
 
     this.alertMessage = 'Your account has been created.';
-    this.alertColor = 'green';
+    this.alertColor = 'bg-green-400';
   }
 }
