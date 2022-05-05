@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth.service';
 
+import { RegistorValidators } from '../validators/registor-validators';
+
+import { EmailTaken } from '../validators/email-taken';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,7 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent {
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl(
+    '',
+    [Validators.required, Validators.email],
+    [this.emailTaken.validate]
+  );
 
   password = new FormControl('', [
     Validators.required,
@@ -27,20 +35,26 @@ export class RegisterComponent {
 
   inSubmission = false;
 
-  registerForm = new FormGroup({
-    name: this.name,
-    email: this.email,
-    password: this.password,
-    confirmPassword: this.confirmPassword,
-    age: this.age,
-    phoneNumber: this.phoneNumber,
-  });
+  registerForm = new FormGroup(
+    {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      confirmPassword: this.confirmPassword,
+      age: this.age,
+      phoneNumber: this.phoneNumber,
+    },
+    [RegistorValidators.match('password', 'confirmPassword')]
+  );
 
   showAlert = false;
   alertMessage = 'Your account is being created. Please wait...';
   alertColor = 'bg-blue-400';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private emailTaken: EmailTaken
+  ) {}
 
   async register() {
     this.showAlert = true;

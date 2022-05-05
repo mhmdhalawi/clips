@@ -19,6 +19,13 @@
   <p class="text-red-400" *ngIf="control?.errors?.min || control?.errors?.max">
     You must between 18 and 100
   </p>
+  <p class="text-red-400" *ngIf="control?.errors?.mismatch">
+    Passwords do not match
+  </p>
+
+  <p class="text-red-400" *ngIf="control?.errors?.emailTaken">
+    Email is already taken
+  </p>
 
   <p class="text-red-400" *ngIf="control?.errors?.pattern">
     Passwords must be at least 8 characters long, have at least one number, one
