@@ -4,8 +4,9 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
   DocumentReference,
+  QuerySnapshot,
 } from '@angular/fire/compat/firestore';
-import { of, switchMap } from 'rxjs';
+import { of, switchMap, map } from 'rxjs';
 
 import { IClip } from '../models/clip.model';
 
@@ -30,6 +31,9 @@ export class ClipService {
         const query = this.clipsCollection.ref.where('uid', '==', user.uid);
 
         return query.get();
+      }),
+      map((snapShot) => {
+        return (snapShot as QuerySnapshot<IClip>).docs;
       })
     );
   }
