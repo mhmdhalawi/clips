@@ -22,22 +22,26 @@
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
     <div
       *ngFor="let clip of clips"
-      class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary flex flex-col justify-start"
+      class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary flex flex-col justify-start rounded-tr-xl"
     >
       <!-- Image -->
-      <a href="#">
+      <a [routerLink]="'/clip/' + clip.docID" class="">
         <img
-          class="card-img-top rounded-tl-2xl w-full"
-          src="assets/img/1.jpg"
+          crossorigin
+          class="card-img-top rounded-tl-xl rounded-tr-xl w-full"
+          [src]="clip.screenshotUrl"
         />
       </a>
 
       <!-- Body -->
       <div class="p-6 text-2xl">
         <!-- Link -->
-        <a href="#" class="font-bold mb-2"> {{ clip.title }} </a>
+        <a [routerLink]="'/clip/' + clip.docID" class="font-bold mb-2">
+          {{ clip.title }}
+        </a>
         <a
           href="#"
+          (click)="copyToClipboard($event, clip.docID)"
           class="bg-gray-400 text-white px-2 py-1 ml-2 text-sm rounded"
         >
           Copy Link
